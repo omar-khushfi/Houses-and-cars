@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة سيارة</title>
+</head>
+<body>
+    <h1>إضافة سيارة جديدة</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <label>الشركة:</label>
+        <input type="text" name="make" required><br><br>
+
+        <label>فئة السيارة:</label>
+        <input type="text" name="car_class" required><br><br>
+
+        <label>الموديل:</label>
+        <input type="text" name="model" required><br><br>
+
+        <label>عدد الأميال:</label>
+        <input type="text" name="mileage" required><br><br>
+
+        <label>اللون الخارجي:</label>
+        <input type="text" name="color" required><br><br>
+
+        <label>اللون الداخلي:</label>
+        <input type="text" name="inside_color" required><br><br>
+
+        <label>نوع السيارة:</label>
+        <input type="text" name="car_type" required><br><br>
+
+        <label>نوع الجير:</label>
+        <input type="text" name="gear_type" required><br><br>
+
+        <label>نظام الدفع:</label>
+        <input type="text" name="wheel_drive" required><br><br>
+
+        <label>نوع المقاعد:</label>
+        <input type="text" name="seat_type" required><br><br>
+
+        <label>سنة الصنع:</label>
+        <input type="number" name="year" required><br><br>
+
+        <label>عدد الأسطوانات:</label>
+        <input type="number" name="cylinder" required><br><br>
+
+        <label>نوع الوقود:</label>
+        <input type="text" name="fuel_type" required><br><br>
+
+        <label>الميزات الإضافية:</label><br>
+        <label>GPS:</label> <input type="checkbox" name="gps" required><br>
+        <label>CD:</label> <input type="checkbox" name="cd" required><br>
+        <label>DVD:</label> <input type="checkbox" name="dvd" required><br>
+        <label>كاميرا خلفية:</label> <input type="checkbox" name="rear_camera" required><br>
+        <label>حساسات:</label> <input type="checkbox" name="sensors" required><br>
+        <label>سقف بانورامي:</label> <input type="checkbox" name="sun_roof" required><br>
+        <label>ضمان:</label> <input type="checkbox" name="with_warranty" required><br>
+        <label>بلوتوث:</label> <input type="checkbox" name="bluetooth" required><br><br>
+
+        <button type="submit">إضافة السيارة</button>
+    </form>
+</body>
+</html>

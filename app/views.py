@@ -5,10 +5,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Merchant
 from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth import login
 class MerchantSignUpView(View):
     template_name = 'signup.html'
-
+    
     def get(self, request):
         return render(request, self.template_name)
 
@@ -52,7 +52,7 @@ class MerchantLoginView(View):
         try:
             merchant = Merchant.objects.get(email=email)
             if check_password(password, merchant.password):
-                request.session['merchant_id'] = merchant.id  
+                login(request, merchant) 
                 messages.success(request, "تم تسجيل الدخول بنجاح.")
                 return redirect('home') 
             else:

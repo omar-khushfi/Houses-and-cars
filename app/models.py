@@ -16,6 +16,8 @@ class Merchant(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
+
+###################Car#################
 # class Car(models.Model):
 #     merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE, related_name="cars")
 #     make = models.CharField(max_length=50)
@@ -39,14 +41,14 @@ class Merchant(models.Model):
 #     with_warranty = models.BooleanField(default=False)
 #     bluetooth = models.BooleanField(default=False)
 #     fuel_type = models.CharField(max_length=20)
-
+#     created_at = models.DateTimeField(auto_now_add=True)
 #     def __str__(self):
 #         return f"{self.make} {self.model} ({self.year})"
 
 
 # class CarImage(models.Model):
 #     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="car_images")
-#     image = models.ImageField(upload_to="photos/car_images/")
+#     image = models.ImageField(upload_to="images/car_images/")
 
 #     def __str__(self):
 #         return f"Image for {self.car.make} {self.car.model}"
@@ -72,3 +74,51 @@ class Merchant(models.Model):
 #     for image in instance.images.all():
 #         if image.image and os.path.isfile(image.image.path):
 #             os.remove(image.image.path)
+
+
+
+#################house###################
+
+
+class House(models.Model):
+    title = models.CharField(max_length=100)    
+    location = models.CharField(max_length=255)  
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    rooms = models.IntegerField() 
+    floor = models.IntegerField() 
+    bathrooms = models.IntegerField() 
+    area = models.DecimalField(max_digits=10, decimal_places=2) 
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+class HouseImage(models.Model):
+    house = models.ForeignKey(House, related_name='house_images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='image/house_images')
+
+    def __str__(self):
+        return f"Image for {self.house.title}"
+    
+    
+    
+    
+
+    
+    
+@receiver(post_delete, sender=HouseImage)
+def delete_house_image_file(sender, instance, **kwargs):
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
+
+
+@receiver(post_delete, sender=House)
+def delete_house_images_on_house_delete(sender, instance, **kwargs):
+    for image in instance.images.all():
+        if image.image and os.path.isfile(image.image.path):
+            os.remove(image.image.path)
+            
+            
+#################################
