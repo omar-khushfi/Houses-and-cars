@@ -1,19 +1,9 @@
-import datetime
+from datetime import datetime
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 import os
-
-
-class Seller(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    password=models.CharField(max_length=50)
-    phone = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
-    image = models.ImageField(upload_to="images/erchant_images/")
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+from accounts.models import *
 
 class Feature(models.Model):
 	feature = models.CharField( max_length=50)

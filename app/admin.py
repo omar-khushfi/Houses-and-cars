@@ -11,5 +11,5 @@ from .models import *
 #     inlines = [CarImageInline] 
 
 # admin.site.register(CarImage)
-admin.site.register(Merchant)
+
 
