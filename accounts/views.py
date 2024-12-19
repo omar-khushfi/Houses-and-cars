@@ -163,7 +163,7 @@ class ResendCodeView(View):
 
                 if time_elapsed < timedelta(minutes=2):
                     remaining_time = timedelta(minutes=2) - time_elapsed
-                    messages.info(request, "The code is still valid, please use the current code.")
+                    messages.error(request, "The code is still valid, please use the current code.")
                     return render(request, 'password_code.html', {
                         'time': remaining_time.total_seconds(), 
                         'email': email
@@ -203,6 +203,7 @@ class ResendCodeView(View):
     
 class new_password(View):
     def get(self,request):
+        
         return render(request,"new_password.html")
     def post(self,request):
         email=request.POST.get("email")
