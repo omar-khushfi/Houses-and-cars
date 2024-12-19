@@ -10,7 +10,7 @@ from django.db import models
 
 class Seller(AbstractUser):
     phone = models.CharField(max_length=30)
-    age=models.IntegerField()
+    age=models.CharField(max_length=3)
     image = models.ImageField(upload_to="images/seller_images/")
     def __str__(self):
       return f"{self.first_name} {self.last_name}"
@@ -18,7 +18,7 @@ class Seller(AbstractUser):
 
 
 class Code(models.Model):
-    user=models.OneToOneField(Seller,on_delete=models.CASCADE)
+    seller=models.OneToOneField(Seller,on_delete=models.CASCADE)
     code=models.CharField(max_length=10)
     date_create=models.DateTimeField(auto_now=True)
 

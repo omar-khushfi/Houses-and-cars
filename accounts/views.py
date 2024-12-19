@@ -59,6 +59,7 @@ class signup_view(View):
         password2=request.POST.get("password2")
         age=request.POST.get("age")
         phone=request.POST.get("phone")
+        photo = request.FILES.get('photo') 
         if Seller.objects.filter(email=email).exists():
             messages.error(request,"this email already exists")
         if Seller.objects.filter(username=username).exists():
@@ -74,7 +75,8 @@ class signup_view(View):
             username=username,
             first_name=first_name,
             last_name=last_name,
-            phone=phone
+            phone=phone,
+            image = photo
             )
         if seller:
             login(request,seller)
